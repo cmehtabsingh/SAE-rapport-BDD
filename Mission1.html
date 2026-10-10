@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport SAÉ S1.04 - KDou</title>
+    <link href="style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="kdou_logo-newoff.png">
+</head>
+<body>
+<header class="en-tete">
+    <nav class="barre-navigation">
+
+        <div class="logo">
+            <img src="kdou_logo-newoff.png" alt="Logo KDou">
+        </div>
+
+        <input type="checkbox" id="toggle-menu">
+        <label for="toggle-menu" class="burger">☰</label>
+
+        <ul class="menu-navigation">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="Mission1.html">Mission 1</a></li>
+            <li><a href="Mission2.html">Mission 2</a></li>
+            <li><a href="Mission3.html">Mission 3</a></li>
+        </ul>
+
+    </nav>
+
+</header>
+<main>
+    <section aria-labelledby="mission1-title">
+        <h1 class="mission-titre">MISSION 1</h1>
+
+        <article>
+            <h2>Question 1 :</h2>
+            <figure>
+                <table>
+                    <caption class="TITRE">Tableau de Synthèse</caption>
+                    <thead>
+                    <tr>
+                        <th>Table (Onglet)</th>
+                        <th>Clé primaire / candidate</th>
+                        <th>Clé étrangère</th>
+                        <th>Type d'information</th>
+                        <th>Utilité pour KDou</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Fournisseur</td>
+                        <td>N fournisseur</td>
+                        <td>/</td>
+                        <td>Identifiant, nom, adresse, contact</td>
+                        <td>Gestion fournisseurs, suivi des achats</td>
+                    </tr>
+                    <tr>
+                        <td>Produit</td>
+                        <td>Réf produit</td>
+                        <td>N fournisseur, Code catégorie</td>
+                        <td>Réf, nom, catégorie, coût, stock</td>
+                        <td>Suivi stock, catalogue, privilèges fournisseurs</td>
+                    </tr>
+                    <tr>
+                        <td>Catégorie</td>
+                        <td>Catégorie de code</td>
+                        <td>/</td>
+                        <td>Libellé, description, coef marge</td>
+                        <td>Organisation gamme produits et marges</td>
+                    </tr>
+                    <tr>
+                        <td>Clientèle</td>
+                        <td>Code client</td>
+                        <td>/</td>
+                        <td>Identifiant, société, coordonnées</td>
+                        <td>CRM, facturation, suivi clients</td>
+                    </tr>
+                    <tr>
+                        <td>Commande</td>
+                        <td>Commande N</td>
+                        <td>Code client</td>
+                        <td>Dates, porto, référence</td>
+                        <td>Gestion commerciale et logistique</td>
+                    </tr>
+                    <tr>
+                        <td>DétailCommande</td>
+                        <td>(N commande, Réf produit)</td>
+                        <td>N commande, Réf produit</td>
+                        <td>Article, quantité, prix, remise</td>
+                        <td>Facturation, analyses des ventes</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <figcaption>Tableau synthétique des tables et leurs rôles dans KDou</figcaption>
+            </figure>
+        </article>
+
+        <article>
+            <h2>Question 2</h2>
+
+            <section>
+                <h3 class="q2">2 a)</h3>
+                <p>Il y a deux méthodes pour trouver le nombre de clients parisiens. En allant dans la feuille client, on fait un filtrage par ville comme ci-dessous :</p>
+                <figure>
+                    <img class="container" src="question2a.jpeg" alt="Capture q2a : filtrage ville client Paris" />
+                    <figcaption>5 clients venant de Paris</figcaption>
+                </figure>
+                <p class="top">On voit qu’il y a 5 clients qui viennent de Paris.</p>
+                <p>Personnellement, j’ai trouvé une autre méthode en utilisant le TCD (Tableau croisé dynamique) qui est plus adapté :</p>
+                <figure>
+                    <img class="container" src="capture2_bis.jpeg" alt="TCD méthode alternative" />
+                    <figcaption>Utilisation du TCD pour filtrer les clients parisiens</figcaption>
+                </figure>
+            </section>
+
+            <section >
+                <h3>2 b)</h3>
+                <p>J’ai utilisé la méthode du TCD pour savoir combien il y a de clients bisontins. J’ai fait un tri par code postal et affiché la valeur du nombre de codes clients. Il y en a 2, ce qui permet de filtrer par ville les clients qui viennent de Besançon :</p>
+                <figure>
+                    <img class="click-img" src="q2b_img.jpg" alt="capture pour question 2b" />
+                </figure>
+            </section>
+
+            <section >
+                <h3>2 c)</h3>
+                <p>Pour savoir combien il y a de clients en Île-de-France, j’ai fait un tri avec le TCD par pays et code postal, cela m’a donné 6 :</p>
+                <figure>
+                    <img src="capture2c.jpeg" alt="capture de la question 2c" />
+                </figure>
+            </section>
+
+            <section>
+                <h3>2 d)</h3>
+                <p>Pour avoir l’adresse et la fonction du fournisseur Andrew Wilson, j’ai effectué un tri sur son nom en vérifiant qu’il n'y avait pas de doublons, mais comme information on avait que son nom et la table où chercher. Voilà le résultat :</p>
+                <figure>
+                    <img src="capture2d.jpeg" alt="capture pour question 2d" />
+                </figure>
+            </section>
+
+            <section>
+                <h3>2 e)</h3>
+                <figure>
+                    <img src="Capture2e_.jpeg" alt="Question 2e" />
+                </figure>
+            </section>
+
+            <section>
+                <h3>2 f)</h3>
+                <p>J’ai effectué un tri par pays avec comme valeur la somme de Numéro du fournisseur. Il y en a 206, voici l'exemple :</p>
+                <figure>
+                    <img src="Capture2f.jpeg" alt="exemple tri pays fournisseurs" />
+                </figure>
+            </section>
+
+            <section>
+                <h3>2 g)</h3>
+                <p>J’ai des difficultés pour le triage, je ne sais pas comment faire une plage des prix.</p>
+            </section>
+
+            <section>
+                <h3>2 h)</h3>
+                <figure>
+                    <img src="Capture2h.jpeg" alt="Question 2h" />
+                </figure>
+            </section>
+
+            <section>
+                <h3>2 i)</h3>
+                <p>Voici la liste des catégories et des noms de produits commandés par la cliente Marie Malef (code client MALEF) dans le fichier :</p>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Catégorie</th>
+                        <th>Nom du produit</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Boissons</td>
+                        <td>Bière Sasquatch</td>
+                    </tr>
+                    <tr>
+                        <td>Pâtes et céréales</td>
+                        <td>Pâté chinois</td>
+                    </tr>
+                    <tr>
+                        <td>Produits laitiers</td>
+                        <td>Geitost</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h3>2 j)</h3>
+                <p>Voici la liste des catégories et des noms de produits commandés par la cliente Marie Malef (code client MALEF) dans le fichier :</p>
+            </section>
+
+            <section>
+                <h3>2 k)</h3>
+                <p>Dans le fichier, les fournisseurs situés aux Pays-Bas ont les sociétés telles que Tulip & Co. Delicacies, Holland Zoetgoed BV, etc. Ces fournisseurs proposent une gamme diversifiée de produits comprenant souvent des biscuits, chocolats, pâtisseries, produits secs et boissons.</p>
+            </section>
+
+            <section>
+                <h3>2 l)</h3>
+                <p>Les fournisseurs espagnols, selon diverses sources, proposent des produits dans les catégories suivantes :</p>
+                <ol>
+                    <li>Charcuterie ibérique (jambon ibérique, chorizo, cecina)</li>
+                    <li>Fromages AOP/IGP (Manchego, Idiazábal, Tetilla)</li>
+                    <li>Épicerie sèche (riz Bomba, pimentón de la Vera, safran)</li>
+                    <li>Conserves premium (navajas, poulpe, bonite, moules)</li>
+                    <li>Huiles et vinaigres (huile d'olive AOVE, vinaigre de Xérès)</li>
+                    <li>Boissons et confiseries</li>
+                    <li>Produits biologiques et végétaux</li>
+                </ol>
+            </section>
+
+            <section>
+                <h3>2 m)</h3>
+                <p>Après analyse, il y a certains clients qui n'ont pas passé de commande.</p>
+            </section>
+
+        </article>
+
+        <article aria-labelledby="q3-title">
+            <h2 id="q3-title">Question 3</h2>
+            <section>
+                <h3>Cas 1 : Maria Larson (cliente Maria Larsson) - Commandes non traitées en novembre 2021</h3>
+                <p>En recherchant dans les commandes associées à Maria Larsson (code client FOLKO), plusieurs commandes de novembre 2021 semblent bien présentes dans la base, mais certaines peuvent manquer ou n'avoir pas été enregistrées. Cette absence peut venir d'un problème de saisie, d'un retard dans la mise à jour des données, ou d'une erreur dans l'association de la commande au client. Une incohérence possible est aussi la fraise de code client incorrect, erroné ou double qui empêche le bon suivi des commandes.</p>
+            </section>
+            <section>
+                <h3>Cas 2 : Marc Randon - Problèmes de communication avec le personnel Kdou</h3>
+                <p>Bien que ce point soit plus qualitatif, des incohérences dans les coordonnées, emails ou adresses de Marc Randon (client GOUMA) pourraient expliquer des difficultés. Vérifier la cohérence des données clients (email, téléphone) et la mise à jour régulière des dossiers clients est importante. Des erreurs dans la documentation des échanges ou l'absence de notes système sur les réclamations peuvent également affecter la résolution des problèmes.</p>
+            </section>
+            <section>
+                <h3>Autres incohérences potentielles</h3>
+                <ul>
+                    <li>Plusieurs clients n'ont pas passé de commande, ce qui peut refléter une entrée de données incomplète ou un suivi client peu rigoureux.</li>
+                    <li>Certains produits indiquant une quantité en stock nulle ou incohérente avec les commandes passées, suggérant un problème de gestion d'inventaire.</li>
+                    <li>Les dates de commandes, envois et livraisons ne respectent pas toujours une chronologie logique (commandes envoyées après la date de livraison prévue par exemple).</li>
+                    <li>Doublons dans les fournisseurs ou clients (mêmes noms ou adresses légèrement différentes) pouvant créer de la confusion.</li>
+                </ul>
+                <p>J’ai remarqué également que lors d’un tri par pays dans le TCD, plusieurs pays avaient leur nom également en anglais comme [translate:Pays-Bas] (Netherlands). Cela peut créer une confusion notamment aussi avec les États-Unis où il y a deux fois USA, ce qui rend le tri difficile pour les pays hors UE. Pour pallier ce problème, on peut si nécessaire mettre les noms des pays en français mais à côté rajouter des guillemets avec leurs noms en anglais. Il ne faut pas non plus hésiter à mettre les signes monétaires, que ce soit dollars ou euros, pour savoir précisément et pouvoir faire les conversions si nécessaire.</p>
+            </section>
+        </article>
+
+    </section>
+</main>
+<footer class="pied-de-page">
+    <div class="conteneur-pied">
+        <div class="contacts">
+            <h3 class="titre-contact">Contact</h3>
+            <ul class="liste-contacts">
+                <li><a href="mailto:shafi.muhammad-majharul-islam@etu.u-paris.fr">Shafi</a></li>
+                <li><a href="mailto:mehtab.cheema@etu.u-paris.fr">Mehtab</a></li>
+                <li><a href="mailto:wayne.polderman-de-jong@etu.u-paris.fr">Wayne</a></li>
+                <li><a href="mailto:daris.possamai@etu.u-paris.fr">Daris</a></li>
+            </ul>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 - Rapport SAE S1.04 KDou</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

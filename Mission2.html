@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport SAÉ S1.04 - KDou</title>
+    <link href="style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="kdou_logo-newoff.png">
+</head>
+<body>
+<header class="en-tete">
+    <nav class="barre-navigation">
+
+        <div class="logo">
+            <img src="kdou_logo-newoff.png" alt="Logo KDou">
+        </div>
+
+        <input type="checkbox" id="toggle-menu">
+        <label for="toggle-menu" class="burger">☰</label>
+
+        <ul class="menu-navigation">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="Mission1.html">Mission 1</a></li>
+            <li><a href="Mission2.html">Mission 2</a></li>
+            <li><a href="Mission3.html">Mission 3</a></li>
+        </ul>
+
+    </nav>
+</header>
+<main>
+    <section aria-labelledby="mission1-title">
+        <h1 class="mission-titre">MISSION 2</h1>
+
+
+
+        <article class="sec">
+            <h2>Questions</h2>
+
+            <section aria-labelledby="q2a-title" >
+                <h3> a)</h3>
+                <p>on veut des informations sur un fournisseur qui s’appelle « Jean-Guy Lauzon j’ai procéder de la manière suivante : j’ai vérifié dans quelle table se trouve « Jean-Guy Lauzon » celle des fournisseurs et j’ai trier par nom mais comme on ne sait pas qu’elle type d’info sur lui j’ai pris les plus pertinent c’est-à-dire son adresse, sa société, et sa fonction. Si j’ai une remarque a faire concernant la requête c’est que je pense faut être plus précis qu’elle information on veut sur lui si on veut juste sa fonction ou bien son adresse et/ou sa société ou il travail.</p>
+
+                    <p>Code SQL qui permet d'avoir les infos sur Guy Lauzon :<br></p>
+                    <p>SELECT Fournisseur.Contact, Fournisseur.Fonction, Fournisseur.Adresse, Fournisseur.Societe
+                    <br>FROM Fournisseur
+                    <br>WHERE (((Fournisseur.Contact)="Jean-Guy Lauzon"));</p>
+                <p>Résultat :</p>
+                <figure>
+                    <img class="container" src="M2_Capture_a_bis.jpeg" alt="resultat graphique" />
+                    <figcaption>information sur guy Lauzon  Fonction, adresse, Société.</figcaption>
+                </figure>
+            </section>
+
+            <section aria-labelledby="q2b-title">
+                <h3> b)</h3>
+                <p>on veut vérifier les coordonnées des client parisiens la méthode par laquelle je suis arrivé au résultat j’ai pris la table client j’ai trier par ville contenant Paris dans les critères et j’ai rajouter leurs coordonnées ainsi que leurs sociétés que j’ai trié par ordre croissant.</p>
+                <p>Code SQL :</p>
+                <p>SELECT Clientele.Ville, Clientele.Tel, Clientele.Societe<br/>
+                FROM Clientele<br/>
+                WHERE(((Clientele.Ville)="Paris"))
+                ORDER BY Clientele.Ville, Clientele.Societe;</p>
+                <p>Résultat :</p>
+                <figure>
+                    <img class="grosse" src="M2_capture_b_bis.jpeg" alt="capture pour question b" />
+                </figure>
+            </section>
+
+            <section aria-labelledby="q2c-title">
+                <h3> c)</h3>
+                <p>SELECT Produit.NomProd, Fournisseur.Pays, Produit.CoutAchat <br>
+                    FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour <br>
+                    WHERE (((Fournisseur.Pays)="USA") AND ((Produit.CoutAchat)<25));
+                </p>
+                <p>Résultat :</p>
+                <figure>
+                    <img class="grosse" src="q_c_M2.jpg" alt="capture question c" />
+                </figure>
+            </section>
+            <section aria-labelledby="q2c-title">
+                <h3> d)</h3>
+                <p>SELECT Produit.NomProd, Produit.CoutAchat, Fournisseur.Societe AS NomFournisseur, Fournisseur.Ville, Fournisseur.Pays <br>
+                    FROM (Produit INNER JOIN Fournisseur ON Produit.NoFour = Fournisseur.NoFour) <br>
+                    INNER JOIN Categorie ON Produit.CodeCateg = Categorie.CodeCateg <br>
+                    WHERE (Categorie.NomCateg = "viandes" OR Categorie.NomCateg = "poissons") AND Produit.CoutAchat > 50;
+                </p>
+                <p>Résultat :</p>
+                <figure>
+                    <img class="grosse" src="q_2_d_M2.jpg" alt="capture question d" />
+                </figure>
+            </section>
+            <section aria-labelledby="q2c-title">
+                <h3 id="q2e-title"> e)</h3>
+                <p>SELECT DISTINCT Clientele.CodeCli, Clientele.Societe, Clientele.Ville, Clientele.Pays <br>
+                    FROM ( ( (Clientele INNER JOIN Commande ON Clientele.CodeCli = Commande.CodeCli) <br>
+                    INNER JOIN DetailCommande ON Commande.[N° commande] = DetailCommande.[N° commande] ) <br>
+                    INNER JOIN Produit ON DetailCommande.[Réf produit] = Produit.RefProd ) INNER JOIN Categorie <br>
+                    ON Produit.CodeCateg = Categorie.CodeCateg<br>
+                    WHERE Categorie.NomCateg IN ("viandes", "poissons");
+                </p>
+                <p>Résultat :</p>
+                <figure>
+                    <img class="grosse" src="q_2_e.jpg" alt="capture question e" /><br>
+                    <img class="grosse" src="q_2_e_suite.jpg" alt="capture question e" />
+                </figure>
+            </section>
+            <section aria-labelledby="q2c-title">
+                <h3> f)</h3>
+                <p>SELECT Produit.RefProd, Produit.NomProd, Produit.QteParUnit <br>
+                    FROM Produit <br>
+                    WHERE Produit.QteParUnit LIKE "*carton*" OR Produit.QteParUnit LIKE "*verre*";
+                </p>
+                <p>Résultat :</p>
+                <figure>
+                    <img class="grosse" src="q_2_f.jpg" alt="capture question e" />
+                </figure>
+            </section>
+            <section aria-labelledby="q2c-title">
+                <h3> g)</h3>
+                <p>SELECT Clientele.CodeCli, Clientele.Societe, Clientele.MailCli <br>
+                    FROM Clientele <br>
+                    LEFT JOIN Commande ON Clientele.CodeCli = Commande.CodeCli <br>
+                    WHERE Commande.[N° commande] IS NULL;
+                </p>
+                <p>Résultat :</p>
+                <figure>
+                    <img class="grosse" src="q_2_g.jpg" alt="capture question e" />
+                </figure>
+            </section>
+            <section aria-labelledby="q2c-title">
+                <h3> h)</h3>
+                <p>SELECT DISTINCT Categorie.CodeCateg, Categorie.NomCateg <br>
+                    FROM (Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour) <br>
+                    INNER JOIN Categorie ON Produit.CodeCateg = Categorie.CodeCateg
+                    WHERE Fournisseur.Pays = "USA";
+                </p>
+                <p>Résultat :</p>
+                <figure>
+                    <img class="grosse" src="q_2_h.jpg" alt="capture question h" />
+                </figure>
+            </section>
+            <section aria-labelledby="q2c-title">
+                <h3> i)</h3>
+                <p>SELECT TOP 5 Commande.*<br>
+                    FROM Commande<br>
+                    INNER JOIN Clientele ON Commande.CodeCli = Clientele.CodeCli<br>
+                    WHERE Clientele.Contact = 'Max Deschamps'<br>
+                    ORDER BY Commande.DateCde DESC;
+                </p>
+                <p>Résultat :</p>
+                <figure>
+                    <img class="grosse" src="q_2_i.jpg" alt="capture question i" />
+                </figure>
+            </section>
+            <section>
+                <h3> j)</h3>
+                <p>SELECT Fournisseur.*<br>
+                    FROM Fournisseur<br>
+                    LEFT JOIN Produit ON Fournisseur.NoFour = Produit.NoFour<br>
+                    WHERE Produit.NoFour IS NULL;
+                </p>
+                <p>Résultat :</p>
+                <figure>
+                    <img src="q_2_j.jpg" alt="capture question j" />
+                </figure>
+            </section>
+            <section>
+                <h3> k)</h3>
+                <p>SELECT Fournisseur.*<br>
+                    FROM Fournisseur<br>
+                    LEFT JOIN Produit ON Fournisseur.NoFour = Produit.NoFour<br>
+                    WHERE Fournisseur.Pays <> 'France' AND Produit.NoFour IS NULL;
+                </p>
+                <p>Résultat :</p>
+                <figure>
+                    <img src="q_2_k.jpg" alt="capture question k" />
+                </figure>
+            </section>
+            <section>
+                <h3> l)</h3>
+                <p>SELECT Clientele.CodeCli, Clientele.Societe, Clientele.MailCli<br>
+                    FROM Clientele<br>
+                    WHERE Clientele.Ville = 'Paris';
+                </p>
+                <p>Résultat :</p>
+                <figure>
+                    <img src="q_2_l.jpg" alt="capture question l" />
+                </figure>
+            </section>
+        </article>
+    </section>
+</main>
+
+<footer class="pied-de-page">
+    <div class="conteneur-pied">
+        <div class="contacts">
+            <h3 class="titre-contact">Contact</h3>
+            <ul class="liste-contacts">
+                <li><a href="mailto:shafi.muhammad-majharul-islam@etu.u-paris.fr">Shafi</a></li>
+                <li><a href="mailto:mehtab.cheema@etu.u-paris.fr">Mehtab</a></li>
+                <li><a href="mailto:wayne.polderman-de-jong@etu.u-paris.fr">Wayne</a></li>
+                <li><a href="mailto:daris.possamai@etu.u-paris.fr">Daris</a></li>
+            </ul>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 - Rapport SAE S1.04 KDou</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

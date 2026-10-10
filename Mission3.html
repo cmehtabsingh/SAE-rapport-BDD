@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport SAÉ S1.04 - KDou</title>
+    <link href="style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="kdou_logo-newoff.png">
+</head>
+<body>
+
+<header class="en-tete">
+    <nav class="barre-navigation">
+        <div class="logo">
+            <img src="kdou_logo-newoff.png" alt="Logo KDou">
+        </div>
+        <ul class="menu-navigation">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="Mission1.html">Mission 1</a></li>
+            <li><a href="Mission2.html">Mission 2</a></li>
+            <li><a href="Mission3.html" class="active">Mission 3</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h1 class="mission-titre">MISSION 3</h1>
+
+    <!-- QUESTION 1 -->
+    <h2>Question 1 :</h2>
+
+    <p>Code SQL :</p>
+    <p>
+SELECT YEAR(c.DateCde) AS annee, cat.NomCateg, SUM(dc.Quantité * p.CoutAchat) AS ChiffreAffaire<br>
+FROM Categorie cat
+LEFT JOIN (Produit p LEFT JOIN (DetailCommande dc LEFT JOIN Commande c ON dc.[N° commande] = c.[N° commande]) <br>
+        ON dc.[Réf produit] = p.RefProd) ON p.CodeCateg = cat.CodeCateg<br>
+WHERE cat.NomCateg IN ('Desserts', 'Boissons')<br>
+GROUP BY YEAR(c.DateCde), cat.NomCateg;
+    </p>
+    <p>Résultat :</p>
+    <figure>
+        <img class="container" src="M3_q1.jpg" alt="resultat graphique" />
+    </figure>
+
+    <!-- QUESTION 2 -->
+    <h2>Question 2 :</h2>
+
+    <p>Code SQL :</p>
+    <p>
+SELECT COUNT(*) AS ProduitsCarnésNonCommandés<br>
+FROM Produit p <br>
+LEFT JOIN DetailCommande dc ON p.RefProd = dc.[Réf produit]<br>
+WHERE p.CodeCateg = 'VIAN' AND dc.[Réf produit] IS NULL;
+    </p>
+    <p>Résultat : 23 produits carnés non commandés.</p>
+
+    <!-- QUESTION 3 -->
+    <h2>Question 3 :</h2>
+    <p>Code SQL :</p>
+    <p>
+SELECT SUM(dc.Quantité * p.CoutAchat) AS CA_Hors_UE<br>
+FROM Produit p JOIN Fournisseur f ON p.CodeFour = f.CodeFour<br>
+JOIN DetailCommande dc ON p.RefProd = dc.[Réf produit]<br>
+WHERE f.Pays NOT IN ('France','Allemagne','Italie','Espagne','Belgique','Pays-Bas','Portugal');
+    </p>
+
+    <p>Résultat : 312 450,00 €</p>
+
+    <!-- QUESTION 4 -->
+    <h2>Question 4 :</h2>
+    <p>Code SQL :</p>
+    <p>
+SELECT c1.NbCommandes, COUNT(*) AS NbClientsAvecCeVolume<br>
+FROM (SELECT CodeCli, COUNT(*) AS NbCommandes FROM Commande GROUP BY CodeCli) AS c1<br>
+GROUP BY c1.NbCommandes<br>
+HAVING COUNT(*) > 1<br>
+ORDER BY c1.NbCommandes DESC;
+    </p>
+    <p>Résultat :</p>
+    <table>
+        <tr><th>Nb de commandes</th><th>Nb de clients</th></tr>
+        <tr><td>8</td><td>12</td></tr>
+        <tr><td>7</td><td>18</td></tr>
+        <tr><td>6</td><td>25</td></tr>
+        <tr><td>5</td><td>42</td></tr>
+        <tr><td>4</td><td>68</td></tr>
+        <tr><td>3</td><td>95</td></tr>
+        <tr><td>2</td><td>210</td></tr>
+    </table>
+
+    <h2>Partie II</h2>
+
+    <p><strong>Mehtab</strong> : Pour ma requête, j’ai voulu envisager de futures livraisons groupées. L’idée d’une livraison groupée est une idée qui m’est venue à l'esprit dès la première mission sur Kdou pour être dans une logique plus écologique au niveau des voyages des produits, que ça soit en avion ou en bateau compte tenu de l'impact sur la pollution. Mon but est donc avec ma requête d’afficher le nombre de sociétés étant dans la même ville et commandant leur produit dans le même pays.
+
+        Cependant, je n’ai pas réussi à faire apparaître exactement ce que je cherchais… Grâce à la requête SQL suivante : <br>
+
+        SELECT DISTINCT F.Pays AS Fournisseur, C.SocieteCli, C.VilleCli<br>
+        FROM CLIENT AS C<br>
+        INNER JOIN (Commande INNER JOIN (FOURNISSEUR AS F INNER JOIN (Produit INNER JOIN DetailCommande <br>
+        ON Produit.RefProd = DetailCommande.RefProd) ON F.NoFour = Produit.NoFour) ON Commande.NoCom = DetailCommande.NoCom) <br>
+        ON C.CodeCli = Commande.CodeCli<br>
+        ORDER BY 1,3;<br>
+        j’ai pu réussir à afficher le tableau suivant:
+    </p>
+    <figure>
+        <img class="container" src="requete_Mehtab.jpg" alt="requête Mehtab" />
+    </figure>
+<p>	<strong>Shafi</strong> : Cette requête calcule le chiffre d’affaires (CA) généré par certaines catégories de produits (Desserts et Boissons), regroupé par année.
+    Yons nécessaires.
+    Résultat attendu : un tableau qui montre, pour chaque année et pour chaque catégorie (Desserts, Boissons), le chiffre d’affaires total.
+
+    Cette requête est intéressante car elle relie directement les données opérationnelles (commandes, produits) à une vision stratégique (chiffre d’affaires par année et par catégorie). Elle sert à comprendre, comparer et anticiper la performance des catégories clés dans le temps.
+</p>
+    <p> SELECT YEAR(c.DateCde) AS annee, cat.NomCateg , SUM(dc.Quantité * p.CoutAchat) AS ChiffreAffaire<br>
+        FROM Categorie cat LEFT JOIN ( Produit p LEFT JOIN (DetailCommande dc <br>
+        LEFT JOIN Commande c ON dc.[N° commande] = c.[N° commande]) ON dc.[Réf produit] = p.RefProd) ON p.CodeCateg = cat.CodeCateg<br>
+        WHERE cat.NomCateg IN ('Desserts', 'Boissons')<br>
+        GROUP BY YEAR(c.DateCde), cat.NomCateg;</p>
+    <p>
+        <strong>Wayne</strong> la liste des produits en stock dont le coût d'achat est supérieur à la moyenne des coûts d'achat pour chaque catégorie. Objectif: identifier les produits qui pourraient être optimisés en négociation ou en sélection d’un fournisseur afin de réduire les coûts globaux pour KDou.Intérêt de la requêteCette requête est pertinente, car elle aide KDou à cibler les produits jugés trop coûteux pour leur catégorie. Sur le plan de l’optimisation, l’entreprise peut envisager d'améliorer sa marge, de négocier avec les fournisseurs ou d’adapter son offre pour rester compétitive tout en respectant son modèle économique et environnemental.Résultat attendu (extrait)Ce tableau présente les produits «chers» par rapport à leur catégorie. Il est lisible pour les associés KDou et permet d’identifier les points à améliorer.Requête SQL Access
+    </p>
+    <p>
+        SELECT Produit.NomProd, Produit.CodeCateg, Produit.CoutAchat, Produit.UnitStock<br>
+        FROM Produit<br>
+        WHERE Produit.CoutAchat > (SELECT AVG(CoutAchat)<br>
+        FROM Produit AS P2<br>
+        WHERE P2.CodeCateg = Produit.CodeCateg) AND Produit.UnitStock > 0;
+    </p>
+    <figure>
+        <img class="container" src="Wayne_requête.jpg" alt="requête Mehtab" />
+    </figure>
+</main>
+
+<footer class="pied-de-page">
+    <div class="conteneur-pied">
+        <div class="contacts">
+            <h3 class="titre-contact">Contact</h3>
+            <ul class="liste-contacts">
+                <li><a href="mailto:shafi.muhammad-majharul-islam@etu.u-paris.fr">Shafi</a></li>
+                <li><a href="mailto:mehtab.cheema@etu.u-paris.fr">Mehtab</a></li>
+                <li><a href="mailto:wayne.polderman-de-jong@etu.u-paris.fr">Wayne</a></li>
+                <li><a href="mailto:daris.possamai@etu.u-paris.fr">Daris</a></li>
+            </ul>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 - Rapport SAE S1.04 KDou</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
